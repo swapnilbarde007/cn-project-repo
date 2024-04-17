@@ -1,0 +1,134 @@
+.outer-div{
+    
+    display: flex;
+    justify-content: center;
+}
+
+.parent-container{
+    margin: 3%;
+    border-radius: 20px;
+    background-color: #ffddd2;
+    width: 50%;
+    padding-top: 20px;
+}
+
+.input-container{
+    background-color: #edf6f9;
+    margin-top: 15px;
+    margin-left: 25%;
+    width: fit-content;
+    padding:1% 1% 1% 1%;
+    border-radius: 20px;
+    font-size: 1.5rem;
+}
+
+.input-container input{
+    background-color: #edf6f9;
+    border: none;
+    font-size: 1.2rem;
+    color: #006d77;
+    margin-left:5px;
+    margin-right: 5px;
+}
+
+.input-container i{
+    margin: 10px
+}
+
+.input-status-bar{
+    display: flex;
+    width: auto;
+    font-size: 0.8rem;
+    margin-right:18%; 
+    margin-left: 25%;
+    flex-direction: row;
+    border-bottom: solid 1px #ffddd2;
+    color: #006d77;
+}
+
+.input-status-bar i{
+    margin-top: 15px;
+}
+
+.clear-complete{
+    margin-left: 35%;
+}
+
+.complete-all-task{
+    margin-left: 10px;
+    width: 30%;
+}
+
+.to-do-list-items{
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.to-do-task{
+    /*display: inline-block;*/
+    width: 100px;
+}
+
+.todo-list-container{
+    background-color: #006d77;
+    /*display: flex;
+    justify-content: space-evenly;
+    align-items: center;*/
+    font-size: 1.2rem;
+    border-radius: 20px;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid;
+    width: 50%;
+    color: #edf6f9;
+    margin-left: 15px;
+    transition-duration: 0.5s;
+    display: flex;
+}
+
+.todo-list-container:hover{
+    background-color: #006d77;
+    /*display: flex;
+    justify-content: space-evenly;
+    align-items: center;*/
+    display: flex;
+    font-size: 1.3rem;
+    border-radius: 20px;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid;
+    width: 55%;
+    color: #edf6f9;
+    margin-left: 15px;
+}
+
+/*.todo-list-container i,input,div{
+    display: inline;
+}*/
+
+/*.todo-list-container i{
+    margin-left: 70%;
+}*/
+.todo-list-container div{
+    width: 90%;
+}
+
+.footer-sec{
+    display: flex;
+    justify-content: center;
+    width: 40%;
+    margin-left: 150px;
+    color: #006d77;
+    font-size: 0.8rem;
+}
+
+.task-filter{
+    display: flex;
+    justify-content: space-around;
+}
+
+.task-filter p{
+    margin-left:10px
+}

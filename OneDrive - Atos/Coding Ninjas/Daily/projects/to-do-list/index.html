@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>To-Do List</title>
+    <script
+      src="https://kit.fontawesome.com/8c872eee2d.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="outer-div">
+      <div class="parent-container">
+        <div class="input-container">
+          <i class="fa-solid fa-list-check"></i>
+          <input
+            type="text"
+            placeholder="Type your to do list"
+            id="txtInputToDo"
+          />
+          <i class="fa-solid fa-plus" id="btnAddTask"></i>
+        </div>
+        <div class="input-status-bar">
+          <i class="fa-solid fa-check"></i>
+          <div class="complete-all-task">
+            <p>Complete All Tasks</p>
+          </div>
+          <div class="clear-complete">
+            <p>Clear Completed*</p>
+          </div>
+        </div>
+        <div class="to-do-list-items" id="to-do-list-items">
+          <!-- <div class="todo-list-container">
+                <input type="radio" name="selectedTask" id="rd1">
+                <div class="to-do-task">Coding Ninjas Study</div>
+                <i class="fa-solid fa-circle-xmark"></i>
+            </div> -->
+        </div>
+
+        <div class="footer-sec">
+          <div>
+            <p id="task-count"></p>
+          </div>
+          <div class="task-filter">
+            <p>All</p>
+            <p>Uncompleted</p>
+            <p>Completed</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>
