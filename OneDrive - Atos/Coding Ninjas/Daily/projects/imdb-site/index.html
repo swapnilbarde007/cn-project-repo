@@ -29,8 +29,11 @@
 	</div>
 	<div class="search-result-list" id="searchResultList">
 		<div id="ulList">
-			<i class="fa-solid fa-bookmark"></i>
-		</ul>
+			<i class="fa-solid fa-bookmark parentTile"></i>
+		</div>
+	</div>
+	<div id="wishlist">
+		Wishlist
 	</div>
 </div>
 
@@ -56,18 +59,20 @@
 </div> -->
 
 
-
+<div class="loader" id="loaderIco"></div>
 <div id="resultSection" class="result-section">
 	<div class="movie-tiles" id="movieTiles">
+		
 		<div class="movie-tile-card">
-			<i class="fa-solid fa-bookmark"></i>
+			<i class="fa-solid fa-bookmark parentTile" id="detailBookmark"></i>
+			<div id="hiddenImdbId" style="display: none;"></div>
 			<div id="thumbnail">
-				<img src="https://m.media-amazon.com/images/M/MV5BYzA4ZjVhYzctZmI0NC00ZmIxLWFmYTgtOGIxMDYxODhmMGQ2XkEyXkFqcGdeQXVyNjExODE1MDc@._V1_SX300.jpg">
+				<img id="thumbnailImg" src="https://m.media-amazon.com/images/M/MV5BYzA4ZjVhYzctZmI0NC00ZmIxLWFmYTgtOGIxMDYxODhmMGQ2XkEyXkFqcGdeQXVyNjExODE1MDc@._V1_SX300.jpg">
 			</div>
 			<div id="rating-sec">
-				<i class="fa-solid fa-star"></i>
-				<h3>3.9</h3>
-				<i class="fa-regular fa-star"></i>
+				<div><i class="fa-solid fa-star"></i></div>
+				<div><h3 id="imdbRatingVal">3.9</h3></div>
+				<div><i class="fa-regular fa-star"></i></div>
 			</div>
 			<div id="movie-title">1. Fallout</div>
 			<div id="watch-options">
@@ -76,10 +81,9 @@
 			<div class="movie-tile-card-footer"></div>
 		</div>
 		<div class="movie-details-sec">
-			<h4 id="plot">After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.</h4>
+			<h4 id="plot"></h4>
 			<h4 id="actors"></h4>
 			<h4 id="creators"></h4>
-			
 		</div>
 	</div>
 

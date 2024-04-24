@@ -108,6 +108,12 @@ body{
     display: flex;
     align-items: center;
     flex-direction: row;
+    top:15px;
+}
+
+.movie-details-sec{
+    padding: 25px;
+    color: antiquewhite;
 }
 
 #rating-sec *{
@@ -115,7 +121,7 @@ body{
 }
 
 #rating-sec .fa-regular{
-    margin-left: 120px;
+    margin-left: 105px;
 }
 
 #movie-title{
@@ -155,15 +161,56 @@ body{
 }
 
 
-.fa-bookmark {
+.parentTile {
+    position: absolute;
     margin-top: -100px;
     z-index: 1;
     margin-left: 5px;
     font-size: 1.8rem;
-    color: black;
+    color: #FDBD01;
     opacity: 60%;
-    left: 15px;
-    top: 10px;
+    left: 1px;
+    top:105px
+}
+
+#wishlist{
+    margin: 15px;
+}
+
+.loader {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 48%;
+    z-index: 9;
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+  
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+.tile{
+    margin-top: -100px;
+    z-index: 1;
+    margin-left: 5px;
+    font-size: 1.8rem;
+    color: #FDBD01;
+    opacity: 60%;
+    left: 1px;
+    top:105px
 }
 
 .fa-bookmark:hover{
@@ -259,11 +306,11 @@ body{
 }
 
 
-.movie-tile-card i{
+/*.movie-tile-card i{
     position: absolute;
     top: 100px;
     left: 0px;
     z-index: 5;
     width: 25px;
     height: 25px;
-}
+}*/

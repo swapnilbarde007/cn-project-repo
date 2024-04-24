@@ -4,6 +4,8 @@ const IMDB_ID_PARAM = "i";
 const API_KEY = "36e789c2";
 var movieDetstatus = false;
 
+let wishList = [];
+
 const EVENT_AND_CLASS_BINDING = [
   {
     searchParam: "s",
@@ -13,6 +15,11 @@ const EVENT_AND_CLASS_BINDING = [
   {
     searchParam: "i",
     eventName: "movieDetails",
+    bindingClass: "MovieDetailsShow",
+  },
+  {
+    searchParam: "i",
+    eventName: "wishList",
     bindingClass: "MovieDetailsShow",
   },
 ];
@@ -82,7 +89,7 @@ class MoviDetails extends MovieResults {
     imdbRating,
     type
   ) {
-    super(title, year, imdbId, type);
+    super(title, year, imdbId, type, poster);
     this.direcotors = direcotors;
     this.actors = actors;
     this.plot = plot;
@@ -124,6 +131,22 @@ class MovieResultsList {
   constructor(movieResult) {
     this.movieResultsList = movieResult;
   }
+}
+
+function castJsonWishListToMovieDetails(json) {
+  let tempMovieArr = [];
+  json.forEach((movieItem) => {
+    const movieObj = new MovieResults(
+      movieItem.Title,
+      movieItem.Year,
+      movieItem.imdbID,
+      movieItem.Type,
+      movieItem.Poster
+    );
+    tempMovieArr.push(movieObj);
+  });
+  let movieResultListObj = new MovieResultsList(tempMovieArr);
+  return movieResultListObj;
 }
 
 //Mapping JSON to Base Classes, MovieResults and MovieResutsList
@@ -169,6 +192,8 @@ function URLBuilder(searParam, searchValue) {
 
 //Handles Server Communication and Trigger Events
 function serverCommunicator(url, eventAndClassBinding) {
+  const loaderIcon = document.getElementById("loaderIco");
+  loaderIcon.style.display = "block";
   const resp = fetch(url)
     .then((resp) => {
       return resp.json();
@@ -181,11 +206,18 @@ function serverCommunicator(url, eventAndClassBinding) {
     })
     .catch((err) => {
       console.log("Error fethching request resource..." + err);
+      loaderIcon.style.display = "none";
     });
 }
 
 function DOMMnuapulator() {
   //Send Request
+  const wishlistBtn = document.getElementById("wishlist");
+  wishlistBtn.addEventListener("click", () => {
+    showWishList();
+  });
+  const loaderIcon = document.getElementById("loaderIco");
+  loaderIcon.style.display = "none";
   const ele_txtSearchInput = document.getElementById("txtSearchInput");
   ele_txtSearchInput.addEventListener("keyup", () => {
     if (ele_txtSearchInput.value.length > 3) {
@@ -202,16 +234,21 @@ function DOMMnuapulator() {
       const movieSearchResults = castJsonToMovieResult(event.detail.response);
       console.log(movieSearchResults);
       refreshMovieListDOM(movieSearchResults);
+      const loaderIcon = document.getElementById("loaderIco");
+      loaderIcon.style.display = "none";
     }
 
     //
   });
 
   window.addEventListener(EVENT_AND_CLASS_BINDING[1].eventName, (event) => {
-    //console.log(event.detail.response);
+    console.log(event.detail.response);
     if (!event.detail.response.Error) {
       const movieDetailsObj = castJsonToMovieDetails(event.detail.response);
       console.log(movieDetailsObj);
+      fillMovieDetailPosterValues(movieDetailsObj);
+      const loaderIcon = document.getElementById("loaderIco");
+      loaderIcon.style.display = "none";
     }
   });
 }
@@ -302,7 +339,12 @@ function prepareMovieResultTile(item) {
   newSearchDiv.appendChild(thumbnailNew);
   newSearchDiv.appendChild(divMovieNameYear);
   const bookmark = document.createElement("i");
-  bookmark.classList.add("fa-solid", "fa-bookmark");
+  bookmark.classList.add("fa-solid", "fa-bookmark", "tile");
+  bookmark.id = `_${item.imdbID}`;
+  bookmark.addEventListener("click", () => {
+    const imdbId = bookmark.id.slice(1, bookmark.id.length);
+    addToWishList(imdbId);
+  });
   newSearchDiv.appendChild(bookmark);
   //         </li>
   li.id = "_" + item.imdbID;
@@ -326,7 +368,81 @@ function showMovieDetailPoster(imdbID) {
   serverCommunicator(url, EVENT_AND_CLASS_BINDING[1]);
 }
 
-function fillMovieDetailPosterValues(json) {
+function fillMovieDetailPosterValues(moviDetailObj) {
+  const detailBookmark = document.getElementById("detailBookmark");
+
+  const hiddenImdbId = document.getElementById("hiddenImdbId");
+  hiddenImdbId.textContent = moviDetailObj.imdbID;
+
   const thumbnailImg = document.getElementById("thumbnailImg");
-  thumbnailImg.src = json.Poster;
+  thumbnailImg.src = moviDetailObj.poster;
+
+  const rating = document.getElementById("imdbRatingVal");
+  rating.textContent = moviDetailObj.imdbRating;
+
+  const movieTitle = document.getElementById("movie-title");
+  movieTitle.textContent = moviDetailObj.title;
+
+  const plot = document.getElementById("plot");
+  plot.textContent = moviDetailObj.plot;
+
+  const actors = document.getElementById("actors");
+  actors.textContent = moviDetailObj.actors;
+
+  const creators = document.getElementById("creators");
+  creators.textContent = moviDetailObj.direcotors;
+
+  detailBookmark.addEventListener("click", () => {
+    addToWishList(hiddenImdbId.textContent);
+  });
 }
+
+function addToWishList(imdbId) {
+  const found = wishList.find((item) => {
+    return item === imdbId;
+  });
+  if (found === undefined) {
+    wishList.push(imdbId);
+  } else {
+    alert("Already added to Wishlist");
+  }
+}
+
+movieDetstatus = true;
+const url = URLBuilder(IMDB_ID_PARAM, "tt0145487");
+serverCommunicator(url, EVENT_AND_CLASS_BINDING[1]);
+
+let lastWishlistItem = "";
+
+function showWishList() {
+  clearSearchResults();
+  wishList.forEach((item, idx) => {
+    const url = URLBuilder(IMDB_ID_PARAM, item);
+    serverCommunicator(url, EVENT_AND_CLASS_BINDING[2]);
+  });
+}
+
+let wishlistArray = [];
+const parentItem = document.getElementById("ulList");
+window.addEventListener(EVENT_AND_CLASS_BINDING[2].eventName, (event) => {
+  //console.log(event.detail.response);
+  const responseJson = event.detail.response;
+  if (wishlistArray.length < wishList.length) {
+    wishlistArray.push(responseJson);
+  }
+  if (wishlistArray.length === wishList.length) {
+    console.log("Last Item Received: " + wishlistArray);
+    let filteredWishlist = wishlistArray.filter((item) => {
+      if (!item.Error) {
+        return item;
+      }
+    });
+    const castedMovieJsonList =
+      castJsonWishListToMovieDetails(filteredWishlist);
+    refreshMovieListDOM(castedMovieJsonList);
+    const loaderIcon = document.getElementById("loaderIco");
+    loaderIcon.style.display = "none";
+
+    //wishlistArray.forEach()
+  }
+});
