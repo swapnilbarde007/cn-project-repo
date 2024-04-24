@@ -3,9 +3,87 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title></title>
+	<title>IMDB Clone App</title>
+	<link rel="icon" type="image/x-icon" href="./res/imdb_ico.png">
+	<link rel="stylesheet" href="./style.css">
+	<script src="https://kit.fontawesome.com/8c872eee2d.js" crossorigin="anonymous"></script>
 </head>
 <body>
+<div class="menu-bar">
+	<div class="site-ico">
+		<img src="./res/imdb_ico.png">
+	</div>
+	<div class="menu-tiles">
+		<div class="menu-lbl">
+			<h3>Menu</h3>
+		</div>
+		<div class="menu-tile-parent">
+			<div class="menu-tile-item"></div>
+			<div class="menu-tile-item"></div>
+			<div class="menu-tile-item"></div>
+		</div>
+	</div>
+	<div class="search-section">
+		<input type="text" id="txtSearchInput" placeholder="Search Movie, TV Shows, etc">
+		<i class="fa-solid fa-magnifying-glass"></i>
+	</div>
+	<div class="search-result-list" id="searchResultList">
+		<div id="ulList">
+			<i class="fa-solid fa-bookmark"></i>
+		</ul>
+	</div>
+</div>
 
+<!-- <div id="movieDetails">
+	<div class="movie-tiles" id="movieTiles">
+		<div class="movie-tile-card">
+			<div id="thumbnail">
+				<img src="https://m.media-amazon.com/images/M/MV5BYzA4ZjVhYzctZmI0NC00ZmIxLWFmYTgtOGIxMDYxODhmMGQ2XkEyXkFqcGdeQXVyNjExODE1MDc@._V1_SX300.jpg">
+			</div>
+			<div id="rating-sec">
+				<i class="fa-solid fa-star"></i>
+				<h3>3.9</h3>
+				<i class="fa-regular fa-star"></i>
+			</div>
+			<div id="movie-title">1. Fallout</div>
+			<div id="watch-options">
+				<button>Watch Options</button>
+			</div>
+			<div class="movie-tile-card-footer"></div>
+		</div>
+	</div>
+
+</div> -->
+
+
+
+<div id="resultSection" class="result-section">
+	<div class="movie-tiles" id="movieTiles">
+		<div class="movie-tile-card">
+			<i class="fa-solid fa-bookmark"></i>
+			<div id="thumbnail">
+				<img src="https://m.media-amazon.com/images/M/MV5BYzA4ZjVhYzctZmI0NC00ZmIxLWFmYTgtOGIxMDYxODhmMGQ2XkEyXkFqcGdeQXVyNjExODE1MDc@._V1_SX300.jpg">
+			</div>
+			<div id="rating-sec">
+				<i class="fa-solid fa-star"></i>
+				<h3>3.9</h3>
+				<i class="fa-regular fa-star"></i>
+			</div>
+			<div id="movie-title">1. Fallout</div>
+			<div id="watch-options">
+				<button>Watch Options</button>
+			</div>
+			<div class="movie-tile-card-footer"></div>
+		</div>
+		<div class="movie-details-sec">
+			<h4 id="plot">After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.</h4>
+			<h4 id="actors"></h4>
+			<h4 id="creators"></h4>
+			
+		</div>
+	</div>
+
+</div>
+<script src="./script1.js"></script>
 </body>
 </html>
