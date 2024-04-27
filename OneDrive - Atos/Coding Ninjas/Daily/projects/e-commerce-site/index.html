@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./style.css">
+  <title>Simple E-commerce Website</title>
+</head>
+<body>
+  <header>
+    <h1>E-commerce Website</h1>
+    <button id="cartBtn">Cart</button>
+  </header>
+  <main>
+    <div id="productsContainer" class="products">
+        <!-- <div id="product1" class="product-tile">
+            <div id="img-section">
+                <div id="btnLeft" class="toggleBtn">
+                    <h3>&lt;</h3>
+                </div>
+                <img id="image-tile" src="https://cdn.dummyjson.com/product-images/7/3.jpg">
+                <div id="btnRight" class="toggleBtn">
+                    <h3>&gt;</h3>
+                </div>
+            </div>
+            <div id="details-sec">
+              <h3 id="productName">iPhone 15</h3>
+              <h3 id="productPrice">$549</h3>
+              <button id="btnAddToCart">Add to Cart</button>
+            </div>
+        </div>
+        <div id="product2">
+
+        </div>
+        <div id="product3">
+
+        </div>
+        <div id="product4">
+
+        </div> -->
+    </div>
+
+    <!-- Cart section -->
+    <div class="cart" id="cart">
+      <h2>Cart</h2>
+      <div class="cart-header">
+        <table id="cartTable" border="1px solid">
+          
+          <!--Insert TR here-->
+          <tbody id="tBody">
+            <th>Sr.#</th>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Qty</th>
+            <th>Total</th>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <button id="checkoutBtn">Checkout</button>
+</main>
+  <script src="./script.js">
+  </script>
+</body>
+</html>
