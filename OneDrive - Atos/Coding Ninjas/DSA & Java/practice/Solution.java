@@ -38,13 +38,19 @@ public class Solution {
         // print1DArray(arr);
         // towerOfHanoi(3, 'A', 'B', 'C');
 
-        System.out.println(addStars("hello"));
+        System.out.println(staircase(5));
 
     }
 
-    public static boolean checkAB(String input) {
-        // Write your code here
+    public static int staircase(int n) {
+        if (n == 0) {
+            return 1;
 
+        }
+        if (n < 0) {
+            return 0;
+        }
+        return staircase(n - 1) + staircase(n - 2) + staircase(n - 3);
     }
 
     public static String addStars(String s) {
