@@ -38,7 +38,53 @@ public class Solution {
         // print1DArray(arr);
         // towerOfHanoi(3, 'A', 'B', 'C');
 
-        System.out.println(staircase(5));
+        System.out.println(splitArray(new int[] { 1, 2, 3, 4 }));
+
+    }
+
+    public static boolean splitArray(int input[]) {
+        if (input.length == 0) {
+            return false;
+        }
+        int divBy5 = 0;
+        int divBy3Not5 = 0;
+        int neutral = 0;
+        for (int i = 0; i < input.length; i++) {
+            if (input[i] % 5 == 0) {
+                divBy5 = divBy5 + input[i];
+            } else if (input[i] % 3 == 0) {
+                divBy3Not5 = divBy3Not5 + input[i];
+            } else {
+                neutral += input[i];
+            }
+        }
+        if (((divBy5 + neutral) == divBy3Not5) || ((divBy3Not5 + neutral) == divBy5)) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    // abc ab
+    public static boolean checkSequence(String a, String b) {
+        if (a.length() == 0 && b.length() > 0) {
+            return false;
+        }
+        if (b.length() == 0) {
+            return true;
+        }
+        if (b.charAt(0) == a.charAt(0)) {
+            return checkSequence(a.substring(1), b.substring(1));
+        } else {
+            return checkSequence(a.substring(1), b);
+        }
+
+        /*
+         * if(b.charAt(0)==a.charAt(0)) --> True
+         * else
+         * 
+         */
 
     }
 

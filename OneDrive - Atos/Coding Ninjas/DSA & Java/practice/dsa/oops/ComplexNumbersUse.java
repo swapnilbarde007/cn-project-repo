@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class ComplexNumbersUse {
     public static void main(String[] args) {
+
         Scanner s = new Scanner(System.in);
 
         int real1 = s.nextInt();
