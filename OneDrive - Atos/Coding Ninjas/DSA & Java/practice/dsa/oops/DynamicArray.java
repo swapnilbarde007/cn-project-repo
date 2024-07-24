@@ -26,7 +26,7 @@ class DynamicArray {
     }
 
     public boolean set(int idx, int val) {
-        if (idx >= nextElementIndex) {
+        if (idx > nextElementIndex) {
             return false;
         }
         this.data[idx] = val;
