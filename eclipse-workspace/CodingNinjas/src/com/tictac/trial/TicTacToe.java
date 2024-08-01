@@ -44,12 +44,13 @@ public class TicTacToe {
 		int moveCounter=0;
 		int maxMoves=this.rows*this.cols;
 		Scanner sc1=new Scanner(System.in);
+		boolean won=false;
 		while(b1.filledCount<maxMoves) {
 			if((moveCounter%2)==0) {
 				System.out.println("Enter move for "+player1.getPlayerName()+": ");
 				String moveInput=sc1.nextLine();
 				try {
-					boolean won=b1.addMove(player1, moveInput.charAt(0)-'0', moveInput.charAt(2)-'0');
+					won=b1.addMove(player1, moveInput.charAt(0)-'0', moveInput.charAt(2)-'0');
 					if(won) {
 						break;
 					}
@@ -62,7 +63,7 @@ public class TicTacToe {
 				System.out.println("Enter move for "+player2.getPlayerName()+": ");
 				String moveInput=sc1.nextLine();
 				try {
-					boolean won=b1.addMove(player2, moveInput.charAt(0)-'0', moveInput.charAt(2)-'0');
+					won=b1.addMove(player2, moveInput.charAt(0)-'0', moveInput.charAt(2)-'0');
 					if(won) {
 						break;
 					}
@@ -72,6 +73,9 @@ public class TicTacToe {
 				}
 			}
 			
+		}
+		if(won==false) {
+			System.out.println("Match draw");
 		}
 		sc1.close();
 	}
