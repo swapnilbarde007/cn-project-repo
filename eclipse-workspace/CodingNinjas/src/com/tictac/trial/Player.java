@@ -1,5 +1,7 @@
 package com.tictac.trial;
 
+import java.util.Scanner;
+
 public class Player {
 	
 	String playerName;
@@ -29,4 +31,18 @@ public class Player {
 			this.playerSymbol = playerSymbol;
 		}
 	}
+	
+//	public Player getPlayerInfo(int playerCount) {
+//		System.out.println("Enter Player "+playerCount+" Name:");
+//		Scanner sc=new Scanner(System.in);
+//		String name=sc.next();
+//		Player player=new Player();
+//		player.setPlayerName(name);
+//		
+//		System.out.println("Enter Player "+playerCount+" Symbol:");
+//		char syb=sc.next().charAt(0);
+//		player.setPlayerSymbol(syb);
+//		
+//		return player;
+//	}
 }
