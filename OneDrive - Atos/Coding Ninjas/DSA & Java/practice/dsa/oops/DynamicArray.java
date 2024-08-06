@@ -9,6 +9,12 @@ class DynamicArray {
         nextElementIndex = 0;
     }
 
+    public void print() {
+        for (int i = 0; i < data.length; i++) {
+            System.out.print(data[i] + " ");
+        }
+    }
+
     public int size() {
         return nextElementIndex;
     }
