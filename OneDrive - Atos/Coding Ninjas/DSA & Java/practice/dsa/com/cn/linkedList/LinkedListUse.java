@@ -74,6 +74,8 @@ public class LinkedListUse {
 
 	public static void main(String[] args) {
 		// Node<Integer> head=createLinkedList();
+		// LinkedListUse lu = new LinkedListUse();
+		// lu.run();
 		headNode = getInputForLL();
 		// increment(head);
 		System.out.println("Length of linked list: " + getLength(headNode));
@@ -99,12 +101,156 @@ public class LinkedListUse {
 		// System.out.println("Found at idx: " + foundIdx);
 		// printIthNode(head,2);
 		// System.out.println(head);
-		System.out.println("Enter seq no. to cut from: ");
-		int cutNode = sc.nextInt();
-		Node<Integer> outputNode = appendLastNToFirst(headNode, cutNode);
-		printLinkedList(outputNode);
-		sc.close();
+		// System.out.println("Enter last N nodes to cut: ");
+		// int cutNode = sc.nextInt();
+		// Node<Integer> outputNode = appendLastNToFirst(headNode, cutNode);
+		// Node<Integer> uniqueLL = removeDuplicates(headNode);
+		// System.out.println("List after removing duplicates");
+		// printLinkedList(uniqueLL);
+		// System.out.println("Reverse LL: ");
+		// printReverse(headNode);
+		// System.out.println("Is Palindrome? : " + isPalindrome(headNode));
 
+		// Node<Integer> insertedNode = insertRecursive(headNode, 99, 3);
+		// System.out.println("After Insert: ");
+		printLinkedList(headNode);
+		sc.close();
+		// System.out.println("After deleting at idx 2");
+		// Node<Integer> deletedNode = deleteNodeRec(headNode, 2);
+		Node<Integer> reversedLL = reverseRec(headNode);
+		System.out.println("After reversed");
+		printLinkedList(reversedLL);
+
+	}
+
+	public static Node<Integer> reverseRec(Node<Integer> head) {
+		if (head == null) {
+			return head;
+		}
+		if (head.next == null) {
+			return head;
+		}
+		Node<Integer> smallRev = reverseRec(head.next);
+		head.next.next = head;
+		head.next = null;
+		return smallRev;
+	}
+
+	public static Node<Integer> deleteNodeRec(Node<Integer> head, int pos) {
+		if (head == null) {
+			return null;
+		}
+		if (pos == 0 && head.next != null) {
+			Node<Integer> newHead = head.next;
+			head.next = null;
+			return newHead;
+		}
+		if (pos == 0 && head.next == null) {
+			return null;
+		}
+
+		head.next = deleteNodeRec(head.next, pos - 1);
+		return head;
+	}
+
+	public static Node<Integer> insertRecursive(Node<Integer> head, int item, int pos) {
+		Node<Integer> newNode = new Node<Integer>(item);
+		if (pos == 0) {
+			newNode.next = head;
+			return newNode;
+		}
+		head.next = insertRecursive(head.next, item, pos - 1);
+		return head;
+	}
+
+	public static boolean isPalindrome1(Node<Integer> head) {
+		if (head == null) {
+			return true;
+		}
+		boolean isPalindrome = false;
+
+		while (head != null) {
+			if (head.next == null) {
+				isPalindrome = true;
+				break;
+			}
+			Node<Integer> tailData = findTail1(head);
+			if (head.data == tailData.data) {
+				isPalindrome = true;
+			} else {
+				isPalindrome = false;
+			}
+			head = head.next;
+		}
+		return isPalindrome;
+	}
+
+	public static Node<Integer> findTail1(Node<Integer> head) {
+		Node<Integer> headBkp = head;
+		Node<Integer> secondLastNode = null;
+		Node<Integer> lastNode = null;
+		while (head != null) {
+			if (head.next != null) {
+				if (head.next.next == null) {
+					secondLastNode = head;
+					lastNode = head.next;
+				}
+			}
+			head = head.next;
+		}
+		secondLastNode.next = null;
+		return lastNode;
+	}
+
+	public static boolean isPalindrome(Node<Integer> head) {
+		// 1 2 3 2 1 = idx 2
+		// 1 1 1 1 1 1 = idx 3
+		int length = getLength(head);
+		int mid = length / 2;
+		int counter = 1;
+		Node<Integer> midNode = null;
+		Node<Integer> headBkp = head;
+		Node<Integer> tail = null;
+		while (head != null) {
+			if (counter == mid) {
+				midNode = head.next;
+			}
+			if (head.next == null) {
+				tail = head;
+			}
+			counter++;
+			head = head.next;
+		}
+		Node<Integer> reversedNode = reverseNode(midNode.next);
+		System.out.println("Stop");
+		return true;
+
+	}
+
+	public static Node<Integer> reverseNode(Node<Integer> head) {
+		Node<Integer> currNode = null;
+		Node<Integer> nextNode = null;
+		if (head == null) {
+			return head;
+		}
+		while (head != null) {
+			currNode = head;
+			nextNode = currNode.next;
+
+			nextNode.next = head;
+			currNode.next = null;
+			head = head.next;
+		}
+
+		return nextNode;
+	}
+
+	public static void printReverse(Node<Integer> root) {
+		if (root == null) {
+			return;
+		}
+		printReverse(root.next);
+		System.out.print(root.data + " ");
 	}
 
 	public static int findNode(Node<Integer> head, int n) {
@@ -117,6 +263,32 @@ public class LinkedListUse {
 			counter++;
 		}
 		return -1;
+	}
+
+	public static Node<Integer> removeDuplicates(Node<Integer> head) {
+
+		if (head == null) {
+			return head;
+		}
+		// Traverse through LL
+		Node<Integer> prevNode = null;
+		Node<Integer> headBkp = head;
+
+		while (head != null) {
+			if (prevNode != null) {
+				if (prevNode.data == head.data) {
+					prevNode.next = head.next;
+					// head = head.next;
+				} else {
+					prevNode = head;
+				}
+
+			} else {
+				prevNode = head;
+			}
+			head = head.next;
+		}
+		return headBkp;
 	}
 
 	public static Node<Integer> appendLastNToFirst(Node<Integer> head, int n) {
@@ -260,4 +432,13 @@ public class LinkedListUse {
 		}
 		return headBkp;
 	}
+
+	// @Override
+	// public void run() {
+	// Runnable task = new LinkedListUse();
+	// System.out.println("Thread created and run...");
+	// Thread th = new Thread(task);
+	// th.start();
+	// // throw new UnsupportedOperationException("Unimplemented method 'run'");
+	// }
 }
