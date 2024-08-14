@@ -117,10 +117,31 @@ public class LinkedListUse {
 		sc.close();
 		// System.out.println("After deleting at idx 2");
 		// Node<Integer> deletedNode = deleteNodeRec(headNode, 2);
-		Node<Integer> reversedLL = reverseRec(headNode);
+		// Node<Integer> reversedLL = reverseRec(headNode);
+		Node<Integer> reversedI = reverse_I(headNode);
 		System.out.println("After reversed");
-		printLinkedList(reversedLL);
+		printLinkedList(reversedI);
+	}
 
+    public static Node<Integer> midPoint(Node<Integer> head) {
+        //Your code goes here
+    }
+
+	public static Node<Integer> reverse_I(Node<Integer> head) {
+		Node<Integer> prevNode = null;
+		Node<Integer> currNode = head;
+		Node<Integer> nextNode = head.next;
+
+		while (nextNode != null) {
+			currNode.next = prevNode;
+
+			prevNode = currNode;
+			currNode = nextNode;
+			nextNode = currNode.next;
+		}
+		Node<Integer> newHead = currNode;
+		newHead.next = prevNode;
+		return newHead;
 	}
 
 	public static Node<Integer> reverseRec(Node<Integer> head) {
