@@ -76,12 +76,16 @@ public class LinkedListUse {
 		// Node<Integer> head=createLinkedList();
 		// LinkedListUse lu = new LinkedListUse();
 		// lu.run();
-		headNode = getInputForLL();
+
+		System.out.println("First LL");
+		Node<Integer> firstLL = getInputForLL();
+		// System.out.println("Second LL");
+		// Node<Integer> secondLL = getInputForLL();
 		// increment(head);
-		System.out.println("Length of linked list: " + getLength(headNode));
-		printLinkedList(headNode);
+		// System.out.println("Length of linked list: " + getLength(headNode));
+		/// printLinkedList(headNode);
 		// System.out.println("Add Item to linked list(value)");
-		Scanner sc = new Scanner(System.in);
+		// Scanner sc = new Scanner(System.in);
 		// int ip=sc.nextInt();
 		//
 		// System.out.println("Add Item to linked list(pos)");
@@ -113,19 +117,105 @@ public class LinkedListUse {
 
 		// Node<Integer> insertedNode = insertRecursive(headNode, 99, 3);
 		// System.out.println("After Insert: ");
-		printLinkedList(headNode);
-		sc.close();
+		// printLinkedList(headNode);
+		// sc.close();
 		// System.out.println("After deleting at idx 2");
 		// Node<Integer> deletedNode = deleteNodeRec(headNode, 2);
 		// Node<Integer> reversedLL = reverseRec(headNode);
-		Node<Integer> reversedI = reverse_I(headNode);
-		System.out.println("After reversed");
-		printLinkedList(reversedI);
+		// Node<Integer> reversedI = reverse_I(headNode);
+		// System.out.println("After reversed");
+		// printLinkedList(reversedI);
+		// Node<Integer> midPoint = midPoint(headNode);
+		// System.out.println("Midpoint of given LL is: " + midPoint.data);
+		Node<Integer> sorted = mergeSort(firstLL);
+		System.out.println("Sorted LL");
+		printLinkedList(sorted);
 	}
 
-    public static Node<Integer> midPoint(Node<Integer> head) {
-        //Your code goes here
-    }
+	public static Node<Integer> mergeSort(Node<Integer> head) {
+		if (head == null) {
+			return head;
+		}
+		if (head.next == null) {
+			return head;
+		}
+
+		Node<Integer> midPoint = midPoint(head);
+		Node<Integer> secondPart = midPoint.next;
+		midPoint.next = null;
+		Node<Integer> sorted1 = mergeSort(head);
+		Node<Integer> sorted2 = mergeSort(secondPart);
+		return mergeTwoSorteds(sorted1, sorted2);
+
+	}
+
+	public static Node<Integer> mergeTwoSorteds(Node<Integer> head1, Node<Integer> head2) {
+		Node<Integer> newHead = null;
+		if (head1 == null && head2 != null) {
+			return head2;
+		} else if (head1 != null && head2 == null) {
+			return head1;
+		} else if (head1 == null && head2 == null) {
+			return head1;
+		}
+		Node<Integer> mergedLL = null;
+		int counter = 0;
+		while (head1 != null && head2 != null) {
+			if (counter == 0) {
+				if (head1.data < head2.data) {
+					mergedLL = new Node<Integer>(head1.data);
+					newHead = mergedLL;
+					head1 = head1.next;
+				} else {
+					mergedLL = new Node<Integer>(head2.data);
+					newHead = mergedLL;
+					head2 = head2.next;
+				}
+			} else {
+				if (head1.data < head2.data) {
+					mergedLL.next = new Node<Integer>(head1.data);
+					mergedLL = mergedLL.next;
+					head1 = head1.next;
+				} else {
+					mergedLL.next = new Node<Integer>(head2.data);
+					mergedLL = mergedLL.next;
+					head2 = head2.next;
+				}
+			}
+			counter++;
+		}
+		if (head1 == null && head2 != null) {
+			mergedLL.next = head2;
+		}
+		if (head1 != null && head2 == null) {
+			mergedLL.next = head1;
+		}
+		return newHead;
+
+	}
+
+	public static Node<Integer> midPoint(Node<Integer> head) {
+		if (head == null) {
+			return head;
+		}
+		if (head.next == null) {
+			return head;
+		}
+		if (head.next.next == null) {
+			return head;
+		}
+		Node<Integer> slowPointer = head;
+		Node<Integer> fastPointer = head;
+
+		while (fastPointer.next != null && fastPointer.next.next != null) {
+			fastPointer = fastPointer.next.next;
+			if (fastPointer == null) {
+				return slowPointer;
+			}
+			slowPointer = slowPointer.next;
+		}
+		return slowPointer;
+	}
 
 	public static Node<Integer> reverse_I(Node<Integer> head) {
 		Node<Integer> prevNode = null;
