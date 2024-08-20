@@ -132,6 +132,33 @@ public class LinkedListUse {
 		printLinkedList(sorted);
 	}
 
+	public static Node<Integer> evenAfterOdd(Node<Integer> head) {
+		// Travere through LL
+		// If even found move it to EOL
+		// Remove the even node
+		// Add to the tail
+		// First odd found will be the head;
+		Node<Integer> tail = head;
+		while (tail.next != null) {
+			head = head.next;
+		}
+
+		Node<Integer> newHead = null;
+		int oddCount = 0;
+		while (head != null && head.next != null) {
+			if (head.next.data % 2 == 0) {
+				Node<Integer> tmp = head.next;
+				tail.next = head;
+			} else {
+				if (oddCount == 0) {
+					newHead = head;
+				}
+				oddCount++;
+			}
+			head = head.next;
+		}
+	}
+
 	public static Node<Integer> mergeSort(Node<Integer> head) {
 		if (head == null) {
 			return head;
